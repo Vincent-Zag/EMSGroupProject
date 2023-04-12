@@ -26,6 +26,6 @@ class CSVWriter:
             return employees
         except:
             print("No such file exists")
-        
+            return []
 
 
