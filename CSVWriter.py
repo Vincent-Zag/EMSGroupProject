@@ -1,6 +1,6 @@
 import csv
 
-#Writer class for inseting, deleting and updating CSV file 
+#Writer class for reading and writing to csv
 
 class CSVWriter:
     def __init__(self, filename):
@@ -11,18 +11,18 @@ class CSVWriter:
             writer = csv.writer(file)
             writer.writerow(data)
     
-    def delete(filename, column_index, value):
-        with open(filename, 'r') as file:
-            reader = csv.reader(file)
-            rows = list(reader)
+    def read(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                reader = csv.DictReader(file)
+                rows = list(reader)
+                return rows
+        except:
+            print("No such file exists")
         
-        with open(filename, 'w', newline='') as file:
-            writer = csv.writer(file)
-            for row in rows:
-                if row[column_index] != value:
-                    writer.writerow(row)
 
-    def update(filename, ):
         
-csvwriter = CSVWriter('EmployeeData.csv')
-csv_writer.write(['habib', 'mulla', 50000, 'data analyst'])
+#To initialize please use        
+#writer = CSVWriter('EmployeeData.csv')
+#writer.read('EmployeeData.csv')
+
