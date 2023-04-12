@@ -1,8 +1,8 @@
 #Department Class
-import CSVWriter as cwrite
-import employee
+from CSVWriter import cwrite
+from employee import employee
 
-class department():
+class department:
     def __init__(self, name, budget, phone):
         self.name = name
         self.budget = budget
@@ -17,7 +17,7 @@ class department():
         else:
             print("already in list")
 
-    def add_emp_to_department(self, id, emp):
+    def add_emp_to_department(self, emp):
         if self.id not in self.emp_list:
             print("Department not in selection")
         else:
@@ -25,7 +25,7 @@ class department():
     
     def remove_department(self, id):
         if self.id in self.department_list:
-            pass
+            self.department_list.remove(self.id)
         else:
             print("Not in list")
         #find in list then remove the info about department
@@ -43,7 +43,7 @@ class department():
                 self.department_list.append(lines)
         return self.department_list
 
-    def list_emp_department(self):
+    def list_emp_in_department(self):
         with open('employeeDepartment.csv', mode ='r')as file:
             data = cwrite.read(file)
             for lines in data:
