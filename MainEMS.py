@@ -1,6 +1,6 @@
-import ems
-import employee
-import CSVWriter
+from ems import ems
+from employee import Employee
+from CSVWriter import CSVWriter
 
 def getFileName():
     fileName = input("Enter csv file name where you want to update or create employees: ")
@@ -16,7 +16,7 @@ def main_menu():
     return choice
 
 def NameError(firstName, lastName):
-    if firstName.isalpha() or lastName.isalpha() == False:
+    if firstName.isalpha() == False or lastName.isalpha() == False:
         print("Name has to have letters only, you cannot have special characters or numbers in your name")
         return False
     else:
@@ -31,6 +31,7 @@ def InvSalary(salary):
         print("salary has to be a integer")
 
 def InvOption(option):
+    option = int(option)
     if option > 5 or option < 1:
         print("invalid option")
 
@@ -41,17 +42,16 @@ if __name__=='__main__':
         choice = main_menu()
         try:
             if choice == '1':
-                try:
-                    firstName = input("Enter first name:\n")
-                    lastName = input("Enter last name:\n")
-                    salary = input("Enter salary for employee:\n")
-                    dep = input("Which department?\n")
-                    if NameError(firstName, lastName):
-                        print("...name is A-Okay")
-                    emp = employee(firstName, lastName, salary, dep)
-                    system.addNewEmployee(emp)
-                except:
-                    print("error")
+                firstName = input("Enter first name:\n")
+                lastName = input("Enter last name:\n")
+                salary = input("Enter salary for employee:\n")
+                dep = input("Which department?\n")
+                if NameError(firstName, lastName):
+                    print("...name is A-Okay")
+                print("before emp")
+                emp = Employee(firstName, lastName, salary, dep)
+                print("employee created")
+                system.add_New_Employee(emp)
             elif choice == '2':
                 update = input("Insert Employee ID:\n")
             elif choice == '3':
