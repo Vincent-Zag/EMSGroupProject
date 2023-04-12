@@ -35,6 +35,8 @@ def InvOption(option):
         print("invalid option")
 
 if __name__=='__main__':
+    filename = getFileName()
+    system = ems(filename)
     while True:
         choice = main_menu()
         try:
@@ -44,11 +46,10 @@ if __name__=='__main__':
                     lastName = input("Enter last name:\n")
                     salary = input("Enter salary for employee:\n")
                     dep = input("Which department?\n")
-
                     if NameError(firstName, lastName):
                         print("...name is A-Okay")
-
                     emp = employee(firstName, lastName, salary, dep)
+                    system.addNewEmployee(emp)
                 except:
                     print("error")
             elif choice == '2':
