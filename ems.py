@@ -1,15 +1,14 @@
-
-
 class ems():
-
-    def __init__(self, emp ):
+    def __init__(self, emp):
         self.emp = emp
+        self.employee_list = []
     
-    def add_New_Employee(self):
+    def add_New_Employee(self,emp):
+
         
 
     def update_Employee(self, emp):
-    
+        
 
     def remove_Employee(self, emp):
 
