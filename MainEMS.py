@@ -1,3 +1,9 @@
+import employee
+import 
+
+def get_file_name():
+    filename = input("Enter csv file to add or update employees")
+    return filename
 
 def main_menu():
     print("1. Add Employee")
@@ -9,12 +15,16 @@ def main_menu():
     return choice
 
 while True:
+    filename = get_file_name()
+    ems = ems(filename)
     choice = main_menu()
     if choice == '1':
         firstName = input("Enter your first name:\n")
         lastName = input("Enter your last name:\n")
         salary = input("Enter salary for employee:\n")
         dep = input("Which department?\n")
+        emp = employee(firstName, lastName, salary, dep)
+        ems.add_New_employee(emp)
     elif choice == '2':
         update = input("Insert Employee ID:\n")
     elif choice == '3':
