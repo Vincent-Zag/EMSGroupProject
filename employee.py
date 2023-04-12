@@ -12,17 +12,12 @@ class Employee:
         self.department = department
         self.date_of_employment = date_of_employement if date_of_employement else date.today()
         self.employee_id = employee_id if employee_id else self.create_id()
-        print("init test")
 
     def create_id(self):
-        print("creatID test")
         id = random.randint(1, 10000)
         while id in Employee.already_use_ids:
-            print("loop test")
             id = random.randint(1, 10000)
-        print("employee already 1")
         Employee.already_use_ids.add(id)
-        print("employee already 2")
         return str(id)
 
     def get_firstName(self):
@@ -42,3 +37,15 @@ class Employee:
     
     def get_department(self):
         return self.department
+    
+    def set_firstName(self, firstname):
+        self.first_name = firstname
+    
+    def set_lastName(self, lastname):
+        self.last_name = lastname
+    
+    def set_salary(self, salary):
+        self.salary = salary
+    
+    def set_department(self, department):
+        self.department = department
