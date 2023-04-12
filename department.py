@@ -8,23 +8,23 @@ class department():
         self.budget = budget
         self.phone = phone
         self.department_list = []
-        self.dept_emp_list = {}
+        self.emp_list = []
         
     def add_department(self, id, emp, name, budget, phone):
         #exception check
-        if id not in self.department_list:
+        if self.budgetid not in self.department_list:
             self.department_list.append(self.id,self.name,self.budget,self.phone)
         else:
             print("already in list")
 
     def add_emp_to_department(self, id, emp):
-        if id not in self.department_list:
+        if self.id not in self.emp_list:
             print("Department not in selection")
         else:
-            data = {i for i in dept_emp_list if dict_1[i]=="id"}
+            self.emp_list.append(self.emp)
     
     def remove_department(self, id):
-        if id in self.department_list:
+        if self.id in self.department_list:
             pass
         else:
             print("Not in list")
@@ -46,12 +46,12 @@ class department():
     def list_emp_department(self):
         with open('employeeDepartment.csv', mode ='r')as file:
             data = cwrite.read(file)
-            for key, value in data:
-                self.dept_emp_list.append(key,value)
-        return self.dept_emp_list
+            for lines in data:
+                self.emp_list.append(lines)
+        return self.emp_list
 
     def dept_error_check(self, name):
-        if name not in self.department_list:
+        if self.name not in self.department_list:
             return False
         else:
             return True
