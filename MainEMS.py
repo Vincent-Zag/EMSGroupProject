@@ -2,6 +2,10 @@ import ems
 import employee
 import CSVWriter
 
+def getFileName():
+    fileName = input("Enter csv file name where you want to update or create employees: ")
+    return fileName
+
 def main_menu():
     print("1. Add Employee")
     print("2. Update existing Employee")
@@ -11,8 +15,8 @@ def main_menu():
     choice = input("Enter your choice: ")
     return choice
 
-def NameError(firstname, lastname):
-    if firstname.isalpha() or lastName.isalpha() == False:
+def NameError(firstName, lastName):
+    if firstName.isalpha() or lastName.isalpha() == False:
         print("Name has to have letters only, you cannot have special characters or numbers in your name")
         return False
     else:
@@ -31,6 +35,8 @@ def InvOption(option):
         print("invalid option")
 
 if __name__=='__main__':
+    filename = getFileName()
+    system = ems(filename)
     while True:
         choice = main_menu()
         try:
@@ -40,11 +46,10 @@ if __name__=='__main__':
                     lastName = input("Enter last name:\n")
                     salary = input("Enter salary for employee:\n")
                     dep = input("Which department?\n")
-
                     if NameError(firstName, lastName):
                         print("...name is A-Okay")
-
-                        #ems.addNewEmployee(firstName, lastName, salary, dep, employee.create_id())
+                    emp = employee(firstName, lastName, salary, dep)
+                    system.addNewEmployee(emp)
                 except:
                     print("error")
             elif choice == '2':
