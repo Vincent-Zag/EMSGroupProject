@@ -1,5 +1,5 @@
 #Department Class
-import csvWriter
+import CSVWriter
 
 class department():
     def __init__(self, id, name, budget, phone):
