@@ -1,9 +1,12 @@
-import ems
-import employee
-import CSVWriter
+from ems import ems
+from employee import Employee
+from CSVWriter import CSVWriter
+import department
 
 def getFileName():
     fileName = input("Enter csv file name where you want to update or create employees: ")
+    if fileName[-4:] != '.csv':
+        fileName += '.csv'
     return fileName
 
 def main_menu():
@@ -16,22 +19,24 @@ def main_menu():
     return choice
 
 def NameError(firstName, lastName):
-    if firstName.isalpha() or lastName.isalpha() == False:
+    if firstName.isalpha() == False or lastName.isalpha() == False:
         print("Name has to have letters only, you cannot have special characters or numbers in your name")
         return False
     else:
         return True 
     
 def InvSalary(salary):
-    if salary > 80000:
+    if int(salary) > 80000:
         print("Employee max salary is 80000")
-    elif salary < 30000:
+    elif int(salary) < 30000:
         print("please dont be cheap minimum wage is 30000 here")
+    elif type(salary) != int:
+        print("Salary has to be a integer")
     else:
-        print("salary has to be a integer")
-
+        return True
+    
 def InvOption(option):
-    if option > 5 or option < 1:
+    if int(option) > 5 or int(option) < 1:
         print("invalid option")
 
 if __name__=='__main__':
@@ -41,23 +46,32 @@ if __name__=='__main__':
         choice = main_menu()
         try:
             if choice == '1':
-                try:
                     firstName = input("Enter first name:\n")
                     lastName = input("Enter last name:\n")
-                    salary = input("Enter salary for employee:\n")
+                    Salary = int(input("Enter salary for employee:\n"))
                     dep = input("Which department?\n")
                     if NameError(firstName, lastName):
                         print("...name is A-Okay")
-                    emp = employee(firstName, lastName, salary, dep)
-                    system.addNewEmployee(emp)
-                except:
-                    print("error")
+                    if InvSalary(Salary):
+                        print("...Salary in our budget")
+                    """if dept_error_check(dep):
+                        print("...Department transfer request")
+                        else:
+                            dep = input("Department not found please enter department again")"""
+                    emp = Employee(firstName, lastName, Salary, dep)
+                    system.add_New_Employee(emp)
+                    print("Employee added")
             elif choice == '2':
-                update = input("Insert Employee ID:\n")
+                IDupdate = input("Insert Employee ID:\n")
+                #ems.update_Employee()
+                print("Employee updated")
             elif choice == '3':
-                remove = input("Enter Employee ID:\n")
+                IDremove = input("Enter Employee ID:\n")
+                #ems.remove_Employee()
+                print("Employee removed")
             elif choice == '4':
-                display = input("Enter Employee ID:\n")
+                IDlist = input("Enter Employee ID:\n")
+                #ems.list_Emp_Info()                
             elif choice == '5':
                 print("Goodbye!")
                 break
