@@ -10,23 +10,15 @@ class ems:
         self.emp.append(employee)
         self.ems_writer.write(self.emp)
 
-    def update_Employee(self, e_id, firstname= None, lastname= None, salary= None, department= None):
+    def update_Employee(self, e_id, attribute, value):
         self.emp = self.ems_writer.read()
         for employee in self.emp:
             if employee.get_employeeId() == e_id:
-                if firstname != None:
-                    employee.set_firstName(firstname)
-                if lastname != None: 
-                    employee.set_lastName(lastname)
-                if salary != None: 
-                    employee.set_salary(salary)
-                if department != None: 
-                    employee.set_department(department)
+                setattr(employee, attribute, value)
                 self.ems_writer.write(self.emp)
-                print("Employee updated")
-                break
-            else: 
-                print("You must give a valid employee ID!!")
+                return 
+             
+        print("You must give a valid employee ID!!")
     
         
     def remove_Employee(self, id):

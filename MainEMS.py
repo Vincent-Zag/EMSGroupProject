@@ -2,8 +2,16 @@ from ems import ems
 from employee import Employee
 from CSVWriter import CSVWriter
 
+class NameErrorException(Exception):
+    pass
+
+class InvalidSalaryError(Exception):
+    pass
+
 def getFileName():
     fileName = input("Enter csv file name where you want to update or create employees: ")
+    if fileName[-4:] != '.csv':
+        fileName += '.csv'
     return fileName
 
 def main_menu():
@@ -15,20 +23,23 @@ def main_menu():
     choice = input("Enter your choice: ")
     return choice
 
-def NameError(firstName, lastName):
-    if firstName.isalpha() == False or lastName.isalpha() == False:
-        print("Name has to have letters only, you cannot have special characters or numbers in your name")
-        return False
+def NameError(name):
+    if name.isalpha() == False:
+        raise NameErrorException("Name has to have letters only, you cannot have special characters or numbers in your name")
+    
     else:
         return True 
     
 def InvSalary(salary):
-    if salary > 80000:
-        print("Employee max salary is 80000")
-    elif salary < 30000:
-        print("please dont be cheap minimum wage is 30000 here")
+    try:
+        salary = int(salary)
+    except:
+        print("salary has to be int")
+    if 30000 < salary < 80000:
+        return True
     else:
-        print("salary has to be a integer")
+        raise InvalidSalaryError("Budget between 30000 to 80000") 
+    
 
 def InvOption(option):
     option = int(option)
@@ -44,17 +55,64 @@ if __name__=='__main__':
             if choice == '1':
                 firstName = input("Enter first name:\n")
                 lastName = input("Enter last name:\n")
-                salary = input("Enter salary for employee:\n")
+                Salary = input("Enter salary for employee:\n")
                 dep = input("Which department?\n")
-                if NameError(firstName, lastName):
-                    print("...name is A-Okay")
-                emp = Employee(firstName, lastName, salary, dep)
-                system.add_New_Employee(emp)
+                
+                try:
+                    if NameError(firstName):
+                        print("...first name is A-Okay")
+
+                    if NameError(lastName):
+                        print("...last name ok")
+                    
+                    if InvSalary(Salary):
+                        print("...Salary in our budget")
+                    else:
+                        break
+                        """if dept_error_check(dep):
+                            print("...Department transfer request")
+                            else:
+                                dep = input("Department not found please enter department again")"""
+
+                    emp = Employee(firstName, lastName, Salary, dep)
+                    system.add_New_Employee(emp)
+                except NameErrorException as e:
+                    print(e)
+                    print("Employee not added")
+                    break
+                except InvalidSalaryError as e:
+                    print(e)
+                    print("employee not added")
+                    break
+
             elif choice == '2':
                 update = input("Insert Employee ID:\n")
-                system.update_Employee(update, firstname="asd")
+                updatechar = input("Which attribute do you want to change( Firstname, Lastname, Salary, Department)\n")
+                updatechar = updatechar.capitalize()
+                if updatechar == 'Firstname' or updatechar == 'Lastname' :
+                    try:
+                        name = input("Enter name\n")
+                        NameError(name)
+                        system.update_Employee(update, updatechar, name)
+                            
+                    except NameErrorException as e:
+                        print(e)
+                        break
+                    
+                if updatechar == 'Salary':
+                    try:
+                        salary = input("Enter Salary change\n")
+                        InvSalary(salary)
+                        system.update_Employee(update, updatechar, salary)
+                    except InvalidSalaryError as e:
+                        print(e)
+                        break
+                if updatechar == 'Department':        
+                   pass
+
             elif choice == '3':
                 remove = input("Enter Employee ID:\n")
+                system.remove_Employee(remove)
             elif choice == '4':
                 display = input("Enter Employee ID:\n")
                 system.list_Emp_Info(display)
@@ -65,4 +123,3 @@ if __name__=='__main__':
                 print("Invalid choice. Please try again.")
         except:
             InvOption(choice)
-
