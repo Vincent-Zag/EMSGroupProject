@@ -29,7 +29,16 @@ class ems:
                 print("You must give a valid employee ID!!")
     
         
-    #def remove_Employee(self, emp):
+    def remove_Employee(self, id):
+        self.emp=self.ems_writer.read()
+        before=len(self.emp)
+        self.emp=[emp for emp in self.emp if emp.get_employeeId() != id]
+        after=len(self.emp)
+        if before==0:
+            print("No employee in the system currently")
+        if before != after:
+            print ("employee ID doesn't exist")
+        self.ems_writer.write(self.emp)
 
 
     def list_Emp_Info(self, id):

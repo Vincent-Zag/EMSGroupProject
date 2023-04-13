@@ -48,16 +48,16 @@ if __name__=='__main__':
                 dep = input("Which department?\n")
                 if NameError(firstName, lastName):
                     print("...name is A-Okay")
-                print("before emp")
                 emp = Employee(firstName, lastName, salary, dep)
-                print("employee created")
                 system.add_New_Employee(emp)
             elif choice == '2':
                 update = input("Insert Employee ID:\n")
+                system.update_Employee(update, firstname="asd")
             elif choice == '3':
                 remove = input("Enter Employee ID:\n")
             elif choice == '4':
                 display = input("Enter Employee ID:\n")
+                system.list_Emp_Info(display)
             elif choice == '5':
                 print("Goodbye!")
                 break
