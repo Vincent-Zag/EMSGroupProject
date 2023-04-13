@@ -23,18 +23,25 @@ class department:
         else:
             self.emp_list.append(self.emp)
     
-    def remove_department(self, id):
+    def remove_department(self, name):
         if self.id in self.department_list:
-            self.department_list.remove(self.id)
+            self.department_list.remove(self.name)
         else:
             print("Not in list")
         #find in list then remove the info about department
 
-    def update_department(self, attribute_name, new_value):
-        if hasattr(self, attribute_name):
-            setattr(self, attribute_name, new_value)
-        else:
-            print("Invalid attribute")
+    def update_department(self, name = None, budget = None, phone = None):
+        for name in self.department_list:
+            if self.name == name:
+                if budget != None:
+                    self.budget = budget
+                if phone != None: 
+                    self.phone = phone
+                else: 
+                    print("You must enter a valid field to be updated!!!")
+            else: 
+                print("You must give a valid department Name!!")
+        self.ems_writer.write(self.emp)
 
     def list_department(self):
         with open('employeeData.csv', mode ='r')as file:

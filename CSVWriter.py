@@ -7,22 +7,25 @@ class CSVWriter:
         self.filename = filename
         
     def write(self, data):
-        with open(self.filename, mode='a', newline='') as file:
+        with open(self.filename, mode='w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(data)
+            writer.writerow(["Employee Id", "First Name", "Last Name", "Salary", "Department", "Date of Employment"])
+            for employee in data:
+                writer.writerow([employee.get_employeeId, employee.get_firstName, employee.get_lastName, employee.get_salary, employee.get_department, employee.get_dateOfEmployment])
+            print("Employees added to CSV file")
     
     def read(self, filename):
         try:
+            employees = []
             with open(filename, 'r') as file:
-                reader = csv.DictReader(file)
-                rows = list(reader)
-                return rows
+                reader = csv.reader(file)
+                next(reader)
+                for row in reader:
+                    employee = employee(row[1], row[2], row[3], row[4], row[0], row[5])
+                    employees.append(employee)
+            return employees
         except:
             print("No such file exists")
-        
+            return []
 
-        
-#To initialize please use        
-#writer = CSVWriter('EmployeeData.csv')
-#writer.read('EmployeeData.csv')
 
