@@ -14,9 +14,9 @@ class Employee:
         self.employee_id = employee_id if employee_id else self.create_id()
 
     def create_id(self):
-        id = random.randomint(1, 10000)
+        id = random.randint(1, 10000)
         while id in Employee.already_use_ids:
-            id = random.randomint(1, 10000)
+            id = random.randint(1, 10000)
         Employee.already_use_ids.add(id)
         return str(id)
 
@@ -37,3 +37,15 @@ class Employee:
     
     def get_department(self):
         return self.department
+    
+    def set_firstName(self, firstname):
+        self.first_name = firstname
+    
+    def set_lastName(self, lastname):
+        self.last_name = lastname
+    
+    def set_salary(self, salary):
+        self.salary = salary
+    
+    def set_department(self, department):
+        self.department = department
