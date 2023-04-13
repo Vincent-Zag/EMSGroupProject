@@ -60,7 +60,7 @@ if __name__=='__main__':
                             dep = input("Department not found please enter department again")"""
                     emp = Employee(firstName, lastName, Salary, dep)
                     system.add_New_Employee(emp)
-                    print("Employee added")
+                    print("Employee added now")
             elif choice == '2':
                 IDupdate = input("Insert Employee ID:\n")
                 #ems.update_Employee()
