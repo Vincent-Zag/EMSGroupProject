@@ -3,7 +3,9 @@ from employee import Employee
 from department import Department
 from department_ems import Dept_ems
 from CSVWriter import CSVWriter
+#All modules called
 
+#Custom exceptions made for name, salary and menu input
 class NameErrorException(Exception):
     pass
 
@@ -13,6 +15,7 @@ class InvalidSalaryError(Exception):
 class InvalidInputError(Exception):
     pass
 
+#Retrieve file name, either for employees or department
 def getFileName(inpt):
     if int(inpt) == 1:
         fileName = input("Enter CSV file name for Employees: ")
@@ -22,6 +25,8 @@ def getFileName(inpt):
         fileName += '.csv'
     return fileName
 
+
+#Main menu options
 def main_menu():
     print("==============================")
     print("1. Add Employee")
@@ -35,6 +40,7 @@ def main_menu():
     print()
     return choice
 
+#Department menu options
 def main_menu_department():
     print("==============================")
     print("1. Add Department")
@@ -47,6 +53,7 @@ def main_menu_department():
     print()
     return choice
 
+# Error handling
 def NameError(name):
     if name.isalpha() == False:
         raise NameErrorException("Name has to have letters only, you cannot have special characters or numbers in your name")
@@ -76,6 +83,7 @@ def InvOption(option):
         print("invalid option")
 
 
+#Running employee menu
 def emp_menu():
     while True:
         choice = main_menu()
@@ -86,6 +94,7 @@ def emp_menu():
                 Salary = input("Enter salary for employee:\n")
                 dep = input("Which department?\n")
                 
+                #Input error check for name salary and department
                 try:
                     if NameError(firstName):
                         print("...first name is A-Okay")
@@ -111,6 +120,7 @@ def emp_menu():
                     print("employee not added")
                     break
 
+            #Update employee in main calling update_Employee        
             elif choice == '2':
                 update = input("Insert Employee ID: ")
                 updatechar = input("Which attribute do you want to change(Firstname, Lastname, Salary, Department): ")
@@ -137,12 +147,15 @@ def emp_menu():
                     print("That is not implemented yet. SoonTM")
                     pass
 
+            #Remove and list employee calling from ems        
             elif choice == '3':
                 remove = input("Enter Employee ID:\n")
                 system.remove_Employee(remove)
             elif choice == '4':
                 display = input("Enter Employee ID:\n")
                 system.list_Emp_Info(display)
+
+            #Switch from employee file to department
             elif choice == '5':
                 print("Switching to Department Menu.")
                 break
@@ -154,7 +167,7 @@ def emp_menu():
         except:
             InvOption(choice)
 
-
+#running department menu
 def dept_menu():
     while True:
         choice = main_menu_department()
@@ -166,7 +179,7 @@ def dept_menu():
                     
                     try:
                         if NameError(name):
-                            print("...first name is A-Okay")
+                            print("...Department name okay")
                         if InvalidInputError(budget):
                             print("...budget inputted")
                         else:  
@@ -219,7 +232,7 @@ def dept_menu():
         except:
             InvOption(choice)
 
-
+#MAIN()
 if __name__=='__main__':
     filename = getFileName(1)
     system = ems(filename)

@@ -30,7 +30,6 @@ class Dept_ems:
             if department.get_name() == name:
                 att = str(attribute.lower())
                 setattr(department, att, value)
-                print(department, attribute, value)
                 self.ems_writer.write_dept(self.dept)
                 return 
 
@@ -55,7 +54,7 @@ class Dept_ems:
         self.dept = self.ems_writer.read_dept()
         for Department in self.dept:
             if Department.get_name() == name:
-                print(f" Department Name: {Department.get_name()} Budget: {Department.get_budget()} Phone: {Department.get_phone()} Employee Count: {Department.get_emp_count()}")
+                print(f" Department Name: {Department.get_name()} Budget: {Department.get_budget()} Phone: {Department.get_phone()}")
                 return
         print("No Department with that name exists")
 

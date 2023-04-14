@@ -1,7 +1,11 @@
 from CSVWriter import CSVWriter
 
+#EMS class with functions add, remove update and list
+
 class ems:
 
+    #initialize writer
+    
     def __init__(self, filepath):
         self.ems_writer = CSVWriter(filepath)
         self.emp = self.ems_writer.read()
