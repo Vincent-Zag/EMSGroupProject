@@ -1,28 +1,39 @@
 #Department Class
-import CSVWriter
+from employee import Employee
 
-class department():
-    def __init__(self, id, name, budget, phone):
-        self.id = id
+class Department:
+
+    def __init__(self, name, budget, phone):
         self.name = name
         self.budget = budget
         self.phone = phone
-        self.department_list = []
+        self.emp_count = 0
         
-    def add_department(self, id, name, budget, phone):
-        self.department_list.append(self.id,self.name,self.budget,self.phone)
+    def set_name(self, name):
+        self.name = name
     
-    def remove_department(self, id):
-        #find in list then remove the info about department
-        pass
+    def set_budget(self, budget):
+        self.budget = budget
+    
+    def set_phone(self, phone):
+        self.phone = phone
 
-    def update_department(self, attribute_name, new_value):
-        if hasattr(self, attribute_name):
-            setattr(self, attribute_name, new_value)
-        else:
-            print("Invalid attribute")
+    def get_name(self):
+        return self.name
+    
+    def get_budget(self):
+        return self.budget
+    
+    def get_phone(self):
+        return self.phone
+    
+    def add__emp(self):
+        self.emp_count += 1
+        return self.emp_count
 
-    def get_list(self):
+    def get_emp_count(self):
+        return self.emp_count
 
-    def list_depts(self, department_list):
 
+
+   

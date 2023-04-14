@@ -1,4 +1,5 @@
 from datetime import date
+from datetime import date
 import random
 
 class Employee:
@@ -12,7 +13,7 @@ class Employee:
         self.Department = Department
         self.date_of_employment = date_of_employement if date_of_employement else date.today()
         self.employee_id = employee_id if employee_id else self.create_id()
-
+    
     def create_id(self):
         id = random.randint(1, 10000)
         while id in Employee.already_use_ids:
