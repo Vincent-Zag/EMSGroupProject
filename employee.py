@@ -2,9 +2,13 @@ from datetime import date
 from datetime import date
 import random
 
+#Employee object created
+
 class Employee:
 
     already_use_ids = set()
+
+    #Initialize instance of Employee
 
     def __init__(self, Firstname, Lastname, Salary, Department, employee_id = None, date_of_employement = None):
         self.Firstname = Firstname
@@ -14,8 +18,10 @@ class Employee:
         self.date_of_employment = date_of_employement if date_of_employement else date.today()
         self.employee_id = employee_id if employee_id else self.create_id()
     
+
     def create_id(self):
         id = random.randint(1, 10000)
+        #check if ID exists in set
         while id in Employee.already_use_ids:
             id = random.randint(1, 10000)
         Employee.already_use_ids.add(id)
